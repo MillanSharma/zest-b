@@ -36,12 +36,17 @@
       {
         "command": "zest-b.helloWorld",
         "title": "Hello World",
-        "category": "Zest:"
+        "category": "Zest"
       },
       {
         "command": "zest-b.askQuestion",
         "title": "Ask a question",
-        "category": "Zest:"
+        "category": "Zest"
+      },
+      {
+        "command": "zest-b.addSnippet",
+        "title": "Add snippet",
+        "category": "Zest"
       }
     ]
   },
