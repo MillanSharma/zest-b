@@ -7,6 +7,11 @@ import { SidebarProvider } from './SidebarProvider';
 export function activate(context: vscode.ExtensionContext) {
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
 
+	const item  = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
+	item.text = "Add todo";
+	item.command = 'zest-b.addSnippet';
+	item.show();
+
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider("zest-b-sidebar", sidebarProvider)
 	  );
