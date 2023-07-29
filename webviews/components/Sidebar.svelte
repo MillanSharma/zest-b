@@ -4,6 +4,11 @@
     let text = '';
 
 </script>
+<style>
+    .complete {
+        text-decoration-line: line-through;
+    }
+</style>
 <input />
 
 <form on:submit|preventDefault ={() =>{ 
@@ -13,6 +18,11 @@
 ><input bind:value={text} /></form>
 
 <ul>{#each todos as todo (todo.text)}
-    <li>{todo.text}</li>
+    <li
+    class:complete={todo.completed}
+    on:click={()=>{
+        todo.completed = !todo.completed
+    }}
+    >{todo.text}</li>
     {/each}
 </ul>
