@@ -15,6 +15,25 @@ export function activate(context: vscode.ExtensionContext) {
 		HelloWorldPanel.createOrShow(context.extensionUri);
 	}));
 
+	context.subscriptions.push(vscode.commands.registerCommand("zest-b.addSnippet", () => {
+		const { activeTextEditor } = vscode.window;
+
+		if(!activeTextEditor){
+			vscode.window.showInformationMessage("no active text editor");
+		}
+
+		const text = activeTextEditor?.document.getText(activeTextEditor.selection);
+		if(text){
+			vscode.window.showInformationMessage("Text: " + text);
+		}
+		sidebarProvider._view?.webview.postMessage({
+			type: 'new-todo',
+			value: text
+		});
+		// activeTextEditor?.document.getText(); 
+		//to get all the text in file
+	}
+	));
 
 	context.subscriptions.push(vscode.commands.registerCommand('zest-b.askQuestion', async () => {
 		const answer = await vscode.window.showInformationMessage('How was your day?', "good", "bad");

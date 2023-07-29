@@ -1,9 +1,17 @@
-<script lang="ts">
-  import { on } from "events";
-
-
+<script lang='ts'>
+    import { onMount } from "svelte";
     let todos: Array<{text: string, completed: boolean}> = [];
     let text = '';
+
+    onMount(()=>{
+        window.addEventListener("message", (event)=> {
+            const message = event.data;
+            switch (message.type){
+                case "new-todo":
+                        todos = [{text: message.value, completed: false}, ...todos]
+            }
+        })
+    })
 
 </script>
 <style>
@@ -16,7 +24,7 @@
 <form on:submit|preventDefault ={() =>{ 
     todos = [...todos, { text: text, completed: false}];
     text='';}
-}
+} 
 ><input bind:value={text} /></form>
 
 <ul>{#each todos as todo (todo.text)}
