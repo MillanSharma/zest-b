@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { on } from "events";
+
 
     let todos: Array<{text: string, completed: boolean}> = [];
     let text = '';
@@ -26,3 +28,25 @@
     >{todo.text}</li>
     {/each}
 </ul>
+
+<button 
+    on:click={()=> {
+        tsvscode.postMessage({
+            type: 'onInfo',
+            value: 'info message send from webview, svelte',
+        })
+    }}
+    >
+    send info
+    </button>
+
+    <button 
+    on:click={()=> {
+        tsvscode.postMessage({
+            type: 'onError',
+            value: 'error message send from webview, svelte',
+        })
+    }}
+    >
+    send error
+    </button>
