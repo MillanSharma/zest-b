@@ -9,9 +9,29 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [ ],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "zest-b-sidebar-view",
+          "title": "Zest-b",
+          "icon": "media/snippet.svg"
+        }
+      ]
+    },
+    "views": {
+      "zest-b-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "zest-b-sidebar",
+          "name": "Zest-b",
+          "icon": "media/snippet.svg",
+          "contextualTitle": "Zest-b"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "zest-b.helloWorld",
