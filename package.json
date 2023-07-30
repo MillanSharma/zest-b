@@ -47,6 +47,11 @@
         "command": "zest-b.addSnippet",
         "title": "Add snippet",
         "category": "Zest"
+      },
+      {
+        "command": "zest-b.authenticate",
+        "title": "Authenticate Zest-b",
+        "category": "Zest"
       }
     ]
   },

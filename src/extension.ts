@@ -3,6 +3,7 @@
 import * as vscode from 'vscode';
 import { HelloWorldPanel } from './HelloWorldPanel';
 import { SidebarProvider } from './SidebarProvider';
+import { authenticate } from './authenticate';
 
 export function activate(context: vscode.ExtensionContext) {
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
@@ -18,6 +19,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(vscode.commands.registerCommand('zest-b.helloWorld', () => {
 		HelloWorldPanel.createOrShow(context.extensionUri);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('zest-b.authenticate', () => {
+		authenticate();
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("zest-b.addSnippet", () => {
