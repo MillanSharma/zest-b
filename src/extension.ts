@@ -3,9 +3,15 @@
 import * as vscode from 'vscode';
 import { HelloWorldPanel } from './HelloWorldPanel';
 import { SidebarProvider } from './SidebarProvider';
+import { authenticate } from './authenticate';
 
 export function activate(context: vscode.ExtensionContext) {
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
+
+	const item  = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
+	item.text = "Add todo";
+	item.command = 'zest-b.addSnippet';
+	item.show();
 
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider("zest-b-sidebar", sidebarProvider)
@@ -13,6 +19,10 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(vscode.commands.registerCommand('zest-b.helloWorld', () => {
 		HelloWorldPanel.createOrShow(context.extensionUri);
+	}));
+
+	context.subscriptions.push(vscode.commands.registerCommand('zest-b.authenticate', () => {
+		authenticate();
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("zest-b.addSnippet", () => {
