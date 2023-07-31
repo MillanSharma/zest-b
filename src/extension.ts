@@ -4,10 +4,13 @@ import * as vscode from 'vscode';
 import { HelloWorldPanel } from './HelloWorldPanel';
 import { SidebarProvider } from './SidebarProvider';
 import { authenticate } from './authenticate';
+import { TokenManager } from './TokenManager';
 
 export function activate(context: vscode.ExtensionContext) {
+	
 	const sidebarProvider = new SidebarProvider(context.extensionUri);
-
+    TokenManager.globalState = context.globalState;
+	
 	const item  = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
 	item.text = "Add todo";
 	item.command = 'zest-b.addSnippet';
@@ -18,11 +21,17 @@ export function activate(context: vscode.ExtensionContext) {
 	  );
 
 	context.subscriptions.push(vscode.commands.registerCommand('zest-b.helloWorld', () => {
-		HelloWorldPanel.createOrShow(context.extensionUri);
+		// HelloWorldPanel.createOrShow(context.extensionUri);
+		vscode.window.showInformationMessage('your token is: '+ TokenManager.getToken());
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand('zest-b.authenticate', () => {
-		authenticate();
+			try{
+				authenticate();
+			} catch{
+				// TODO: handle this gracefully
+				console.error('Failed to initiate authentication');
+			}
 	}));
 
 	context.subscriptions.push(vscode.commands.registerCommand("zest-b.addSnippet", () => {
