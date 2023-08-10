@@ -9,7 +9,7 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [ "onStartupFinished", "onLanguage:*"],
   "main": "./dist/extension.js",
   "contributes": {
     "viewsContainers": {
@@ -32,7 +32,27 @@
         }
       ]
     },
+    "menus": {
+      "view/title": [
+        {
+          "command": "myext.minify",
+          "when": "always"
+        },
+        {
+          "command": "myext.restore",
+          "when": "always"
+        }
+      ]
+    },
     "commands": [
+      {
+        "command": "myext.minify",
+        "title": "  Minify"
+      },
+      {
+        "command": "myext.restore",
+        "title": "✓ Minify"
+      },
       {
         "command": "zest-b.helloWorld",
         "title": "Hello World",
@@ -44,15 +64,20 @@
         "category": "Zest"
       },
       {
-        "command": "zest-b.addSnippet",
-        "title": "Add snippet",
+        "command": "zest-b.insertAndCallAPI",
+        "title": "Insert /name",
         "category": "Zest"
       },
       {
         "command": "zest-b.authenticate",
         "title": "Authenticate Zest-b",
         "category": "Zest"
-      }
+      },
+      {
+      "command": "zest-b.getGitHubUser",
+      "title": "Get Github User Zest-b",
+      "category": "Zest"
+    }
     ]
   },
   "scripts": {

@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { getNonce } from "./getNonce";
-import { apiBaseUrl } from "./constants";
-import { TokenManager } from "./TokenManager";
+import { apiBaseUrl, constKeys, constType } from "./constants";
+import { UserManager } from "./TokenManager";
 // import { authenticate } from "./authenticate";
 // import { apiBaseUrl } from "./constants";
 // import { getNonce } from "./getNonce";
@@ -40,27 +40,38 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         //   });
         //   break;
         // }
-        case "get-token": {
+        case constKeys.onAuthenticate: {
           webviewView.webview.postMessage({
-            type: "token",
-            value: TokenManager.getToken(),
+            type: constType.token,
+            value: UserManager.getUserObject(),
           });
           break;
         }
-        case "onInfo": {
+
+        case constKeys.getUser: {
+          webviewView.webview.postMessage({
+            type: constType.userObject,
+            value: UserManager.getUserObject(),
+          });
+        }
+
+        case constKeys.onInfo: {
+          console.log('DATA RECIEVED',data);
           if (!data.value) {
             return;
           }
           vscode.window.showInformationMessage(data.value);
           break;
         }
-        case "onError": {
+
+        case constKeys.onError: {
           if (!data.value) {
             return;
           }
           vscode.window.showErrorMessage(data.value);
           break;
         }
+
       }
     });
   }

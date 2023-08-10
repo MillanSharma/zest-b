@@ -1,5 +1,5 @@
-import { TokenManager } from "../TokenManager";
+// import { TokenManager } from "../TokenManager";
 
-export const getHeadersWithToken = () => {
-    return TokenManager.getToken();
-  };
+// export const getHeadersWithToken = () => {
+//     return TokenManager.getToken();
+//   };

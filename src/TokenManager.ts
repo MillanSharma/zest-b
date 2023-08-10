@@ -1,15 +1,15 @@
 import * as vscode from "vscode";
 
-const KEY = "nicekey";
+const KEY = "token";
 
-export class TokenManager {
+export class UserManager {
   static globalState: vscode.Memento;
 
-  static setToken(token: string) {
-    return this.globalState.update(KEY, token);
+  static setUserObject(userObject: Object) {
+    return this.globalState.update(KEY, userObject);
   }
 
-  static getToken(): string | undefined {
+  static getUserObject(): Object | undefined {
     return this.globalState.get(KEY);
   }
 }
